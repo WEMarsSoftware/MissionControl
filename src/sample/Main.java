@@ -6,6 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/*
+Links:
+ - communicating with Arduino by reading data from a Serial port in Java:
+
+https://stackoverflow.com/questions/15996345/java-arduino-read-data-from-the-serial-port
+
+*/
 public class Main extends Application {
 
     @Override
