@@ -12,8 +12,6 @@ import java.lang.*;
 
 
 public class Controller implements Initializable {
-    @FXML
-    private ProgressBar progressBar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -27,15 +25,6 @@ public class Controller implements Initializable {
         while(true)
         {
             break;
-        }
-        progressBar.setProgress(0);
-    }
-    public void win()
-    {
-        progressBar.setProgress(progressBar.getProgress()+0.1);
-        if (progressBar.getProgress() > 0.95)
-        {
-            progressBar.setProgress(0);
         }
     }
 }
