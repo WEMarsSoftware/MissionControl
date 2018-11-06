@@ -31,7 +31,7 @@ public class Main extends Application {
         primaryStage.setScene(primaryScene);
 
         primaryStage.getIcons().add(new Image("file:src/sample/WesternLogo.png"));
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
         primaryStage.show();
     }
 
