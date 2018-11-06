@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.*;
@@ -16,17 +17,19 @@ public class Controller implements Initializable {
     @FXML
     private TextField roverIP;
 
+    @FXML
+    private TextArea logger; // console for HTTP stuff
+
     @Override
     public void initialize(URL url, ResourceBundle rb) { }
 
-    public void httpTest()
+    public void roverHTTPGet()
     {
-        System.out.println("HTTP TEST");
         try {
-            CommunicationsController.getSensorData();
+            String response = CommunicationsController.getSensorData(roverIP);
+            CommunicationsController.updateLog(response, logger);
         } catch (Exception e) {
-            // nothing
-            System.out.println(e.getMessage());
+            /* do nothing */
         }
     }
 
