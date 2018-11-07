@@ -22,10 +22,13 @@ public class Main extends Application {
         primaryStage.setTitle("WE MARS Mission Control");
         Scene primaryScene = new Scene(root, 1000, 600);
 
-        // callback for key press
+        /* Callback for key press events
+         *  This may be useful for joystick input (a future TODO)
+         */
         primaryScene.setOnKeyPressed(event -> {
             String codeString = event.getCode().toString();
-            System.out.println(codeString);
+
+            // System.out.println(codeString);
         });
 
         primaryStage.setScene(primaryScene);

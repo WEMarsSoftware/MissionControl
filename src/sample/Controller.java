@@ -20,16 +20,36 @@ public class Controller implements Initializable {
     @FXML
     private TextArea logger; // console for HTTP stuff
 
+    @FXML
+    protected static ProgressBar motor1;
+    @FXML
+    protected static ProgressBar motor2;
+    @FXML
+    protected static ProgressBar motor3;
+    @FXML
+    protected static ProgressBar motor4;
+    @FXML
+    protected static ProgressBar motor5;
+    @FXML
+    protected static ProgressBar motor6;
+
+    private CommunicationsController comms;
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) { }
+    public void initialize(URL url, ResourceBundle rb) {
+        /* Initialize data points */
+        comms = new CommunicationsController();
+    }
 
     public void roverHTTPGet()
     {
         try {
             String response = CommunicationsController.getSensorData(roverIP);
-            CommunicationsController.updateLog(response, logger);
+            logger.setText(response);
+            CommunicationsController.updateData(response);
+            CommunicationsController.updateProgessBar(motor1, 1);
         } catch (Exception e) {
-            /* do nothing */
+            System.out.println(e.getCause() + " " + e.getMessage());
         }
     }
 

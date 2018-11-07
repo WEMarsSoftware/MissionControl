@@ -4,9 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
+
+import javafx.scene.control.*;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.lang.StringBuilder;
@@ -16,15 +17,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.xml.soap.Text;
 import java.util.*;
 
 import java.lang.*;
-import javafx.scene.control.TextArea;
+
+import org.json.*;
 
 public class CommunicationsController {
 
     /* This may need to be changed for different systems */
+    // TODO: check if this can be null
     private final static String USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36";
+
+    private final static int NUM_MOTORS = 6;
+    private final static double MAX_CURRENT_IN_AMPS = 50.0;
+
+    private static double[] motorCurrents;
+
+    public CommunicationsController() {
+        motorCurrents = new double[NUM_MOTORS];
+    }
 
     /**
      * @param roverIP - textField in GUI containing entered IP
@@ -67,13 +80,51 @@ public class CommunicationsController {
         return response.toString();
     }
 
+    private static double getCurrentAsPercentage(double current) {
+        return (current/MAX_CURRENT_IN_AMPS);
+    }
     /**
-     *
+     * Update progress bars with values
      * @param response string to set textArea to show
-     * @param area the TextArea to display to
      */
-    public static void updateLog(String response, TextArea area)
+    public static void updateData(String response)
     {
-        area.setText(response);
+        parseJSON(response);
+    }
+
+    /**
+     * Parse JSON in response and store values in private data variables (ie. sensor data)
+     * @param response - full HTTP response from rover
+     */
+    public static void parseJSON(String response) {
+        /* use org.json library */
+        /* set progress bars for motor currents */
+        String text = "";
+        String temp = "";
+
+
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(response);
+
+            // NOTE: motor currents appear in JSON 1-indexed (1->6)
+            // parse out motor currents
+            for (int i = 1; i <= motorCurrents.length; i++) {
+                temp = jsonObject.getString("Motor"+ Integer.toString(i));
+                motorCurrents[i-1] = Double.parseDouble(temp);
+                System.out.println("Motor " + i + ": " + motorCurrents[i-1]);
+                text = text + " " + temp;
+            }
+        } catch (org.json.JSONException e) {
+            /* do something */
+            System.out.println("JSON Parse Error:");
+            System.out.println(e.getCause() + " " + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+    
+    public static void updateProgressBar(ProgressBar pb, int motorNumber) {
+        pb.setProgess(getCurrentAsPercentage(motorCurrents[motorNumber-1]));
     }
 }
