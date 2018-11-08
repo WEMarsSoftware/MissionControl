@@ -21,17 +21,17 @@ public class Controller implements Initializable {
     private TextArea logger; // console for HTTP stuff
 
     @FXML
-    protected static ProgressBar motor1;
+    private Label motor1;
     @FXML
-    protected static ProgressBar motor2;
+    private Label motor2;
     @FXML
-    protected static ProgressBar motor3;
+    private Label motor3;
     @FXML
-    protected static ProgressBar motor4;
+    private Label motor4;
     @FXML
-    protected static ProgressBar motor5;
+    private Label motor5;
     @FXML
-    protected static ProgressBar motor6;
+    private Label motor6;
 
     private CommunicationsController comms;
 
@@ -47,8 +47,14 @@ public class Controller implements Initializable {
             String response = CommunicationsController.getSensorData(roverIP);
             logger.setText(response);
             CommunicationsController.updateData(response);
-            CommunicationsController.updateProgessBar(motor1, 1);
+            CommunicationsController.updateLabel(motor1, 0);
+            CommunicationsController.updateLabel(motor2, 1);
+            CommunicationsController.updateLabel(motor3, 2);
+            CommunicationsController.updateLabel(motor4, 3);
+            CommunicationsController.updateLabel(motor5, 4);
+            CommunicationsController.updateLabel(motor6, 5);
         } catch (Exception e) {
+            System.out.println("ROVER HTTP GET ERROR");
             System.out.println(e.getCause() + " " + e.getMessage());
         }
     }

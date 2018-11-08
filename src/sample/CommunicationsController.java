@@ -35,6 +35,8 @@ public class CommunicationsController {
 
     private static double[] motorCurrents;
 
+    private final static String MOTOR_CURRENTS_LABEL_PREFIX = "Motor1: ";
+
     public CommunicationsController() {
         motorCurrents = new double[NUM_MOTORS];
     }
@@ -124,7 +126,11 @@ public class CommunicationsController {
 
     }
     
-    public static void updateProgressBar(ProgressBar pb, int motorNumber) {
-        pb.setProgess(getCurrentAsPercentage(motorCurrents[motorNumber-1]));
+    public static void updateLabel(Label words, int motorNumber) {
+        String newCurrentVal =  Double.toString(motorCurrents[motorNumber]);
+        newCurrentVal = words.getText().substring(0, MOTOR_CURRENTS_LABEL_PREFIX.length()) + " " + newCurrentVal;
+        System.out.println("UPDATE LABEL");
+        System.out.println(newCurrentVal);
+        words.setText(newCurrentVal);
     }
 }
