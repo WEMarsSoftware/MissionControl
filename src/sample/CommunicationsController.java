@@ -114,7 +114,6 @@ public class CommunicationsController {
             for (int i = 1; i <= motorCurrents.length; i++) {
                 temp = jsonObject.getString("Motor"+ Integer.toString(i));
                 motorCurrents[i-1] = Double.parseDouble(temp);
-                System.out.println("Motor " + i + ": " + motorCurrents[i-1]);
                 text = text + " " + temp;
             }
         } catch (org.json.JSONException e) {
@@ -129,8 +128,6 @@ public class CommunicationsController {
     public static void updateLabel(Label words, int motorNumber) {
         String newCurrentVal =  Double.toString(motorCurrents[motorNumber]);
         newCurrentVal = words.getText().substring(0, MOTOR_CURRENTS_LABEL_PREFIX.length()) + " " + newCurrentVal;
-        System.out.println("UPDATE LABEL");
-        System.out.println(newCurrentVal);
         words.setText(newCurrentVal);
     }
 }
