@@ -4,16 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+
+import javafx.scene.control.*;
 
 import java.util.*;
 import java.lang.*;
 
 
 public class Controller implements Initializable {
+    /**
+     * IP's of various controllers
+     */
+    private String driveIP;
+    private String armIP;
+    private String science1IP;
+    private String jetsonIP;
+
     @FXML
     private TextField roverIP;
 
@@ -59,4 +65,14 @@ public class Controller implements Initializable {
         }
     }
 
+    public void setRoverIPs() {
+        // opens new window
+        AddIPsController newWindow = new AddIPsController();
+    }
+
+    // setters for IP's for device
+    public void setDriveIP(String ip) { driveIP = ip; }
+    public void setScience1IP(String ip) { science1IP = ip; }
+    public void setArmIP(String ip) { armIP = ip; }
+    public void setJetsonIP(String ip) { jetsonIP = ip; }
 }

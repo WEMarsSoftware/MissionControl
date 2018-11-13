@@ -24,7 +24,7 @@
       <Separator layoutX="286.0" layoutY="5.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <Separator layoutX="640.0" layoutY="14.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <TextField fx:id="roverIP" layoutX="832.0" layoutY="15.0" />
-      <Label layoutX="766.0" layoutY="19.0" text="Rover IP:" />
+      <Label layoutX="694.0" layoutY="42.0" text="Rover IP:" />
       <Button layoutX="916.0" layoutY="50.0" mnemonicParsing="false" onAction="#roverHTTPGet" text="Connect" />
       <TextArea fx:id="logger" layoutX="668.0" layoutY="407.0" prefHeight="200.0" prefWidth="322.0" wrapText="true" />
       <Label fx:id="motor1" layoutX="696.0" layoutY="88.0" prefHeight="17.0" prefWidth="126.0" text="Motor 1: 19.2" />
@@ -33,5 +33,6 @@
       <Label fx:id="motor4" layoutX="819.0" layoutY="88.0" prefHeight="17.0" prefWidth="126.0" text="Motor 4: 19.2" />
       <Label fx:id="motor5" layoutX="821.0" layoutY="110.0" prefHeight="17.0" prefWidth="126.0" text="Motor 5: 19.2" />
       <Label fx:id="motor6" layoutX="821.0" layoutY="132.0" prefHeight="17.0" prefWidth="126.0" text="Motor 6: 19.2" />
+      <Button layoutX="665.0" layoutY="2.0" mnemonicParsing="false" onAction="#setRoverIPs" text="Add Rover IPs" />
    </children>
 </AnchorPane>
