@@ -42,14 +42,12 @@ public class CommunicationsController {
     }
 
     /**
-     * @param roverIP - textField in GUI containing entered IP
+     * @param url - IP of controller with current sensors
      * @return the entire HTTP response as a String
      * @throws Exception if bad things happen
      */
-    public static String getSensorData(TextField roverIP) throws Exception
+    public static String getSensorData(String url) throws Exception
     {
-
-        String url = roverIP.getText();
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "http://" + url;
         }
