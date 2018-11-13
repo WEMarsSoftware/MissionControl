@@ -1,4 +1,4 @@
-#Contributing 
+# Contributing 
 
 This document outlines a guide to new contributors to the repo.
 
