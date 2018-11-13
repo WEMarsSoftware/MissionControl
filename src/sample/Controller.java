@@ -15,13 +15,10 @@ public class Controller implements Initializable {
     /**
      * IP's of various controllers
      */
-    private String driveIP;
-    private String armIP;
-    private String science1IP;
-    private String jetsonIP;
-
-    @FXML
-    private TextField roverIP;
+    private static String driveIP;
+    private static String armIP;
+    private static String science1IP;
+    private static String jetsonIP;
 
     @FXML
     private TextArea logger; // console for HTTP stuff
@@ -50,7 +47,7 @@ public class Controller implements Initializable {
     public void roverHTTPGet()
     {
         try {
-            String response = CommunicationsController.getSensorData(roverIP);
+            String response = CommunicationsController.getSensorData(driveIP);
             logger.setText(response);
             CommunicationsController.updateData(response);
             CommunicationsController.updateLabel(motor1, 0);
@@ -67,12 +64,13 @@ public class Controller implements Initializable {
 
     public void setRoverIPs() {
         // opens new window
-        AddIPsController newWindow = new AddIPsController();
+        AddIPsController ipController = new AddIPsController();
+        ipController.open();
     }
 
     // setters for IP's for device
-    public void setDriveIP(String ip) { driveIP = ip; }
-    public void setScience1IP(String ip) { science1IP = ip; }
-    public void setArmIP(String ip) { armIP = ip; }
-    public void setJetsonIP(String ip) { jetsonIP = ip; }
+    public static void setDriveIP(String ip) { driveIP = ip; }
+    public static void setScience1IP(String ip) { science1IP = ip; }
+    public static void setArmIP(String ip) { armIP = ip; }
+    public static void setJetsonIP(String ip) { jetsonIP = ip; }
 }

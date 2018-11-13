@@ -1,39 +1,40 @@
 package sample;
 
-import javafx.scene.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import java.util.*;
-import java.lang.*;
-import javafx.scene.control.*;
 
-public class AddIPsController {
-    // reference main app controller
-    private Controller mainController;
+import java.lang.*;
+
+public class AddIPsController implements Initializable {
+
+    private Stage stage;
 
     @FXML
     private TextField driveIPBox;
+    @FXML
     private TextField jetsonIPBox;
+    @FXML
     private TextField armIPBox;
+    @FXML
     private TextField science1IPBox;
 
-    public AddIPsController() {
+    public void open() {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getClassLoader().getResource("addIPs.fxml"));
-            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("file:src/fxml/addIPs.fxml"));
+            loader.setLocation(new URL("file:src/fxml/addIPs.fxml"));
+            root = (Parent)loader.load();
+            stage = new Stage();
             stage.setTitle("Add Rover IP's");
-            stage.setScene(new Scene(root, 400, 200));
+            stage.setScene(new Scene(root, 400, 240));
             stage.setResizable(false);
             stage.show();
 
@@ -42,11 +43,20 @@ public class AddIPsController {
         }
     }
 
-    public void closeWindow() {
-        // save info somehow
-        mainController.setRoverIPs(driveIPBox.getText());
-        mainController.setArmIP(armIPBox.getText());
-        mainController.setJetsonIP(jetsonIPBox.getText());
-        mainController.setScience1IP(science1IPBox.getText());
+    @Override
+    public void initialize(URL url, ResourceBundle rb) { /* do nothing */ }
+
+    public void save() {
+        // save info in the main control
+        Controller.setDriveIP(driveIPBox.getText());
+        Controller.setScience1IP(science1IPBox.getText());
+        Controller.setJetsonIP(jetsonIPBox.getText());
+        Controller.setArmIP(armIPBox.getText());
+        close();
+    }
+
+    public void close() {
+        Stage stg = (Stage) driveIPBox.getScene().getWindow();
+        stg.close();
     }
 }
