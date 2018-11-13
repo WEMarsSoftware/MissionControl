@@ -42,6 +42,10 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /* Initialize data points */
         comms = new CommunicationsController();
+
+        /* Initialize camera feeds */
+        CameraController cameras = new CameraController();
+        cameras.open();
     }
 
     public void roverHTTPGet()
