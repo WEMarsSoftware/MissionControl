@@ -45,7 +45,8 @@ public class Controller implements Initializable {
 
         /* Initialize camera feeds */
         CameraController cameras = new CameraController();
-        cameras.open();
+        cameras.openWindow();
+        cameras.update();
     }
 
     public void roverHTTPGet()
@@ -77,4 +78,6 @@ public class Controller implements Initializable {
     public static void setScience1IP(String ip) { science1IP = ip; }
     public static void setArmIP(String ip) { armIP = ip; }
     public static void setJetsonIP(String ip) { jetsonIP = ip; }
+
+    public static String getJestonIP() { return jetsonIP; }
 }
