@@ -4,6 +4,18 @@
     introduces dockable tabs to the TabPane system.
     Possibly super buggy and needs more testing but works outside of the project
 
+
+    Usage:
+
+    @FXML
+    private TabPane weTabPane;              // Reference new TabPane from FXML
+
+    @FXML
+    public void initialize() {
+        TabManager.create().makeTabsDetachable(weTabPane);  // Convert to WEMars TabManager Utility
+    }
+
+
 */
 
 package weutils;
