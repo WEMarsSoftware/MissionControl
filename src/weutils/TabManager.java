@@ -22,7 +22,6 @@ package weutils;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
@@ -247,9 +246,7 @@ public class TabManager {
         stage.setScene(scene);                  // Set contents
         stage.setTitle(tab.getText());          // Set title text
         stage.setAlwaysOnTop(getForceTop());
-//        Point2D p = MouseRobot.getMousePosition();
-//        stage.setX(p.getX());
-//        stage.setY(p.getY());
+
 
         // STUB: On Close request, return back to the tab pane
         stage.setOnCloseRequest((WindowEvent e) -> {
