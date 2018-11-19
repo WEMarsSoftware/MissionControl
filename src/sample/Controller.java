@@ -5,11 +5,13 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javafx.scene.control.*;
 
 import java.util.*;
 import java.lang.*;
 
+import weutils.TabManager;
 
 public class Controller implements Initializable {
     /**
@@ -36,12 +38,20 @@ public class Controller implements Initializable {
     @FXML
     private Label motor6;
 
+    @FXML
+    private TabPane testTab;
+
+
     private CommunicationsController comms;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /* Initialize data points */
         comms = new CommunicationsController();
+
+
+        //
+        TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
 
         /* Initialize camera feeds */
         CameraController cameras = new CameraController();

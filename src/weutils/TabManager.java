@@ -12,7 +12,7 @@
 
     @FXML
     public void initialize() {
-        TabManager.create().makeTabsDetachable(weTabPane);  // Convert to WEMars TabManager Utility
+        TabManager.create().setTabsDockable(weTabPane);  // Convert to WEMars TabManager Utility
     }
 
 
@@ -155,7 +155,7 @@ public class TabManager {
      * @param stylesheets The stylesheets to be set.
      * @return The current TabManager instance.
      */
-    public TabManagerstylesheets(String... stylesheets) {
+    public TabManager stylesheets(String... stylesheets) {
         this.stylesheets = stylesheets;
         return this;
     }
@@ -170,7 +170,7 @@ public class TabManager {
 
         // Reference the current tab pane
         this.tPane = tab;
-
+        System.out.println(tab.getTabs());
         // Store the original tabs, use a map for speed!
         defaultTabs.addAll(tab.getTabs());
         for (int i = 0; i < tab.getTabs().size(); i++) {
@@ -185,7 +185,7 @@ public class TabManager {
         // STUB: when drag is deteched, save a snapshot of the data
         tab.setOnDragDetected(
                 (MouseEvent e) -> {
-                    if (event.getSource() instanceof TabPane) {
+                    if (e.getSource() instanceof TabPane) {
                         Pane rootPane = (Pane) tab.getScene().getRoot();
                         rootPane.setOnDragOver((DragEvent e1) -> {
                             e1.acceptTransferModes(TransferMode.ANY);
@@ -247,9 +247,9 @@ public class TabManager {
         stage.setScene(scene);                  // Set contents
         stage.setTitle(tab.getText());          // Set title text
         stage.setAlwaysOnTop(getForceTop());
-        Point2D p = MouseRobot.getMousePosition();
-        stage.setX(p.getX());
-        stage.setY(p.getY());
+//        Point2D p = MouseRobot.getMousePosition();
+//        stage.setX(p.getX());
+//        stage.setY(p.getY());
 
         // STUB: On Close request, return back to the tab pane
         stage.setOnCloseRequest((WindowEvent e) -> {
