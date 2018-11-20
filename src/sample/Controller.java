@@ -58,7 +58,7 @@ public class Controller implements Initializable {
         public void handle(ActionEvent event) {
             try {
                 cameras.update();
-                System.out.println("UPDATE");
+               
             } catch (Exception e) {
                 /* Do nothing */
             }
