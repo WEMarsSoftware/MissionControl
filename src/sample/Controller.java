@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 import javafx.scene.control.*;
 
 import java.util.*;
@@ -13,10 +14,11 @@ import java.lang.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
-//import java.awt.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.Event;
 import javafx.event.ActionEvent;
+
+import weutils.TabManager;
 
 public class Controller implements Initializable {
     /**
@@ -42,6 +44,10 @@ public class Controller implements Initializable {
     private Label motor5;
     @FXML
     private Label motor6;
+
+    @FXML
+    private TabPane testTab;
+
 
     private CommunicationsController comms;
     private static CameraController cameras;
@@ -69,6 +75,10 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /* Initialize data points */
         comms = new CommunicationsController();
+
+
+        //
+        TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
 
         /* Initialize camera feeds */
         cameras = new CameraController();
