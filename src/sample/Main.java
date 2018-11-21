@@ -20,7 +20,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/sample.fxml"));
         primaryStage.setTitle("WE MARS Mission Control");
-        Scene primaryScene = new Scene(root, 1000, 600);
+        Scene primaryScene = new Scene(root, 1000, 610);
 
         /* Callback for key press events
          *  This may be useful for joystick input (a future TODO)

@@ -24,7 +24,6 @@
       </ImageView>
       <Separator layoutX="286.0" layoutY="5.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <Separator layoutX="640.0" layoutY="14.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
-      <Button layoutX="920.0" layoutY="2.0" mnemonicParsing="false" onAction="#roverHTTPGet" text="Connect" />
       <TextArea fx:id="logger" layoutX="667.0" layoutY="408.0" prefHeight="200.0" prefWidth="322.0" wrapText="true" />
       <Label fx:id="motor1" layoutX="705.0" layoutY="49.0" prefHeight="17.0" prefWidth="126.0" text="Motor 1: 19.2" />
       <Label fx:id="motor2" layoutX="704.0" layoutY="70.0" prefHeight="17.0" prefWidth="126.0" text="Motor 2: 19.2" />
