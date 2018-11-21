@@ -1,4 +1,4 @@
-package sample;
+package wemission;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +43,8 @@ public class CameraController implements Initializable {
             stage.setTitle("Rover Camera Feed");
             stage.setScene(new Scene(root, 600, 400));
             stage.setResizable(false);
+
+            stage.getIcons().add(new Image("file:src/wemission/WesternLogo.png"));
             stage.show();
 
             update();

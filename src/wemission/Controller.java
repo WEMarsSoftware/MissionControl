@@ -1,4 +1,4 @@
-package sample;
+package wemission;
 
 import javafx.animation.Animation;
 import javafx.fxml.FXML;
@@ -9,13 +9,11 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
 
-import java.util.*;
 import java.lang.*;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.event.EventHandler;
-import javafx.event.Event;
 import javafx.event.ActionEvent;
 
 import weutils.TabManager;

@@ -1,4 +1,4 @@
-package sample;
+package wemission;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
         primaryStage.setTitle("WE MARS Mission Control");
         Scene primaryScene = new Scene(root, 1000, 610);
 
@@ -33,7 +33,7 @@ public class Main extends Application {
 
         primaryStage.setScene(primaryScene);
 
-        primaryStage.getIcons().add(new Image("file:src/sample/WesternLogo.png"));
+        primaryStage.getIcons().add(new Image("file:src/wemission/WesternLogo.png"));
         primaryStage.setResizable(true);
         primaryStage.show();
     }
