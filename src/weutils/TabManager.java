@@ -3,7 +3,7 @@
     EXPERIMENTAL: Tab Manager that stubs tab panes found within JavaFX, that
     introduces dockable tabs to the TabPane system.
     Possibly super buggy and needs more testing but works outside of the project
-
+    @TODO - Add 2D Point library to add position to new stages
 
     Usage:
 
@@ -246,7 +246,8 @@ public class TabManager {
         stage.setScene(scene);                  // Set contents
         stage.setTitle(tab.getText());          // Set title text
         stage.setAlwaysOnTop(getForceTop());
-
+        stage.setHeight(tPane.getHeight()-35);
+        stage.setWidth(tPane.getWidth());
 
         // STUB: On Close request, return back to the tab pane
         stage.setOnCloseRequest((WindowEvent e) -> {
