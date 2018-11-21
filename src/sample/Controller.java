@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.Animation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.net.URL;
@@ -10,6 +11,12 @@ import javafx.scene.control.*;
 
 import java.util.*;
 import java.lang.*;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import javafx.event.EventHandler;
+import javafx.event.Event;
+import javafx.event.ActionEvent;
 
 import weutils.TabManager;
 
@@ -44,6 +51,26 @@ public class Controller implements Initializable {
 
 
     private CommunicationsController comms;
+    private static CameraController cameras;
+
+    /**
+     * Any tasks that affect GUI elements need to run in a timeline handle()
+     * Background tasks not affecting GUI stuff can run in Worker threads
+     *
+     * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
+     */
+    Timeline secondLoop = new Timeline(new KeyFrame(Duration.seconds(0.4), new EventHandler<ActionEvent>() {
+
+        @Override
+        public void handle(ActionEvent event) {
+            try {
+                cameras.update();
+               
+            } catch (Exception e) {
+                /* Do nothing */
+            }
+        }
+    }));
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -55,9 +82,11 @@ public class Controller implements Initializable {
         TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
 
         /* Initialize camera feeds */
-        CameraController cameras = new CameraController();
+        cameras = new CameraController();
         cameras.openWindow();
-        cameras.update();
+
+        secondLoop.setCycleCount(Animation.INDEFINITE);
+        secondLoop.play();
     }
 
     public void roverHTTPGet()
@@ -85,10 +114,23 @@ public class Controller implements Initializable {
     }
 
     // setters for IP's for device
-    public static void setDriveIP(String ip) { driveIP = ip; }
-    public static void setScience1IP(String ip) { science1IP = ip; }
-    public static void setArmIP(String ip) { armIP = ip; }
-    public static void setJetsonIP(String ip) { jetsonIP = ip; }
+    // Note: updateAddresses() pulls IP's from this main controller
+    public static void setDriveIP(String ip) {
+        driveIP = ip;
+        cameras.updateAddresses();
+    }
+    public static void setScience1IP(String ip) {
+        science1IP = ip;
+        cameras.updateAddresses();
+    }
+    public static void setArmIP(String ip) {
+        armIP = ip;
+        cameras.updateAddresses();
+    }
+    public static void setJetsonIP(String ip) {
+        jetsonIP = ip;
+        cameras.updateAddresses();
+    }
 
     public static String getJestonIP() { return jetsonIP; }
 }
