@@ -59,7 +59,7 @@ public class Controller implements Initializable {
      *
      * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
      */
-    Timeline secondLoop = new Timeline(new KeyFrame(Duration.seconds(0.4), new EventHandler<ActionEvent>() {
+    Timeline secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
