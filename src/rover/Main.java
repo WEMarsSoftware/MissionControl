@@ -1,4 +1,10 @@
-package sample;
+package rover;
+//
+//import edu.wpi.first.wpilibj.DriverStationLCD;
+//import edu.wpi.first.wpilibj.IterativeRobot;
+//import edu.wpi.first.wpilibj.command.CommandGroup;
+//import edu.wpi.first.wpilibj.command.Scheduler;
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +39,7 @@ public class Main extends Application {
 
         primaryStage.setScene(primaryScene);
 
-        primaryStage.getIcons().add(new Image("file:src/sample/WesternLogo.png"));
+        primaryStage.getIcons().add(new Image("file:src/rover/WesternLogo.png"));
         primaryStage.setResizable(true);
         primaryStage.show();
     }
