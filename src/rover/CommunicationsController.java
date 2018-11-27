@@ -1,24 +1,12 @@
-package sample;
+package rover;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.scene.control.*;
-import javafx.scene.control.ProgressBar;
 
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
-import java.lang.StringBuilder;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.xml.soap.Text;
-import java.util.*;
 
 import java.lang.*;
 
