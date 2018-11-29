@@ -14,12 +14,12 @@
    <children>
       <ImageView fitHeight="86.0" fitWidth="95.0" layoutX="9.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/WeMars.jpg" />
+            <Image url="@../../java/images/WeMars.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="49.0" fitWidth="157.0" layoutX="120.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/WesternEngLogo.png" />
+            <Image url="@../../java/images/WesternEngLogo.png" />
          </image>
       </ImageView>
       <Separator layoutX="419.0" layoutY="14.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
@@ -41,7 +41,7 @@
                      <children>
                         <ImageView fitHeight="304.0" fitWidth="423.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/map.png" />
+                              <Image url="@../../java/images/map.png" />
                            </image>
                         </ImageView>
                      </children>
