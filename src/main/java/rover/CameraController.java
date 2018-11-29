@@ -36,8 +36,9 @@ public class CameraController implements Initializable {
 
     public void openWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("file:src/fxml/camera.fxml"));
-            loader.setLocation(new URL("file:src/fxml/camera.fxml"));
+            String camPath = "/fxml/camera.fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(camPath));
+            loader.setLocation(getClass().getResource(camPath));
             root = (AnchorPane) loader.load();
             stage = new Stage();
             stage.setTitle("Rover Camera Feed");

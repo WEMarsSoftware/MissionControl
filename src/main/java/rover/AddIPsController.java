@@ -29,8 +29,9 @@ public class AddIPsController implements Initializable {
     public void open() {
         Parent root;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("file:src/fxml/addIPs.fxml"));
-            loader.setLocation(new URL("file:src/fxml/addIPs.fxml"));
+            String addIPSPath = "/fxml/addIPs.fxml";
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(addIPSPath));
+            loader.setLocation(getClass().getResource(addIPSPath));
             root = (Parent)loader.load();
             stage = new Stage();
             stage.setTitle("Add Rover IP's");
@@ -42,6 +43,7 @@ public class AddIPsController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) { /* do nothing */ }
