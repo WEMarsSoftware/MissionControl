@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+import weutils.JoystickManager;
 import weutils.TabManager;
 
 public class Controller implements Initializable {
@@ -49,6 +50,7 @@ public class Controller implements Initializable {
 
     private CommunicationsController comms;
     private static CameraController cameras;
+    private static JoystickManager joysticks;
 
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
@@ -73,7 +75,9 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         /* Initialize data points */
         comms = new CommunicationsController();
-
+        joysticks = new JoystickManager();
+        Thread t = new Thread(joysticks);
+        t.start();
 
         //
         TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
@@ -84,6 +88,8 @@ public class Controller implements Initializable {
 
         secondLoop.setCycleCount(Animation.INDEFINITE);
         secondLoop.play();
+
+        JoystickManager jm = new JoystickManager();
     }
 
     public void roverHTTPGet()
