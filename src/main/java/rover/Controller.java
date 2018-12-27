@@ -50,25 +50,13 @@ public class Controller implements Initializable {
 
     private CommunicationsController comms;
     private static CameraController cameras;
-
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads
      *
      * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
      */
-    Timeline secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-
-        @Override
-        public void handle(ActionEvent event) {
-            try {
-                cameras.update();
-               
-            } catch (Exception e) {
-                /* Do nothing */
-            }
-        }
-    }));
+    Timeline secondLoop;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,6 +71,18 @@ public class Controller implements Initializable {
         cameras = new CameraController();
         cameras.openWindow();
 
+        secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    cameras.update();
+
+                } catch (Exception e) {
+                    /* Do nothing */
+                }
+            }
+        }));
         secondLoop.setCycleCount(Animation.INDEFINITE);
         secondLoop.play();
     }
