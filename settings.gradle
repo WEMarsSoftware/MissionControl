@@ -16,3 +16,4 @@ include 'services:webservice'
 */
 
 rootProject.name = 'MissionControl'
+//setProperty("java.library.path", Paths.get("lib").toAbsolutePath().toString());
