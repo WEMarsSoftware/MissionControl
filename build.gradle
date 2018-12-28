@@ -25,10 +25,6 @@ dependencies{
 
 apply plugin: 'javafx-gradle-plugin'
 
-copy {
-    from zipTree(destFolder.toString() + "/lib/jinput-platform-2.0.7-natives-windows.jar")
-    into destFolder.toString() + "/lib"
-}
 
 jfx {
     fixedManifestClasspath = null

@@ -3,7 +3,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<<<<<<< HEAD:src/fxml/camera.fxml
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wemission.CameraController">
+=======
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rover.CameraController">
+>>>>>>> master:src/main/resources/fxml/camera.fxml
    <children>
       <ImageView fx:id="camera1" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
