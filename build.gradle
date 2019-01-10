@@ -16,8 +16,11 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies{
     compile 'org.json:json:20180813'
+    compile 'net.java.jinput:jinput-platform:2.0.7'
+    compile 'net.java.jinput:jinput:2.0.7'
 }
 
 apply plugin: 'javafx-gradle-plugin'

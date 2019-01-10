@@ -47,7 +47,6 @@ public class Controller implements Initializable {
     private TabPane testTab;
 
 
-
     private CommunicationsController comms;
     private static CameraController cameras;
 
