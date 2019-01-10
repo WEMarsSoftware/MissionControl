@@ -36,7 +36,7 @@ public class CameraController implements Initializable {
 
     public void openWindow() {
         try {
-            String camPath = "/fxml/camera.fxml";
+            String camPath = "/src/main/resources/fxml/camera.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(camPath));
             loader.setLocation(getClass().getResource(camPath));
             root = (AnchorPane) loader.load();
@@ -82,6 +82,10 @@ public class CameraController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) { /* Do nothing */ }
+    public void initialize(URL url, ResourceBundle rb) {
+        /* Do nothing */
+        updateAddresses();
+        update();
+    }
 
 }

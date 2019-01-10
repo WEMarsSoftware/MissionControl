@@ -47,7 +47,6 @@ public class Controller implements Initializable {
     private TabPane testTab;
 
 
-
     private CommunicationsController comms;
     private static CameraController cameras;
 
@@ -57,18 +56,7 @@ public class Controller implements Initializable {
      *
      * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
      */
-    Timeline secondLoop = new Timeline(new KeyFrame(Duration.seconds(10), new EventHandler<ActionEvent>() {
-
-        @Override
-        public void handle(ActionEvent event) {
-            try {
-                cameras.update();
-               
-            } catch (Exception e) {
-                /* Do nothing */
-            }
-        }
-    }));
+    Timeline secondLoop;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -83,6 +71,18 @@ public class Controller implements Initializable {
         cameras = new CameraController();
         cameras.openWindow();
 
+        secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    cameras.update();
+
+                } catch (Exception e) {
+                    /* Do nothing */
+                }
+            }
+        }));
         secondLoop.setCycleCount(Animation.INDEFINITE);
         secondLoop.play();
     }
