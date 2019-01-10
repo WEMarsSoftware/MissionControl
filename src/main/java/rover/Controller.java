@@ -47,9 +47,9 @@ public class Controller implements Initializable {
     private TabPane testTab;
 
 
-
     private CommunicationsController comms;
     private static CameraController cameras;
+
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads

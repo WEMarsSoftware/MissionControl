@@ -36,7 +36,7 @@ public class CameraController implements Initializable {
 
     public void openWindow() {
         try {
-            String camPath = "file:///main/resources/fxml/camera.fxml";
+            String camPath = "/src/main/resources/fxml/camera.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(camPath));
             loader.setLocation(getClass().getResource(camPath));
             root = (AnchorPane) loader.load();
