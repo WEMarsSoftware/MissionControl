@@ -48,12 +48,15 @@ public class Controller implements Initializable {
 
 
     private CommunicationsController comms;
+
     private static CameraController cameras;
+
+    private SettingsController settings;
 
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads
-     *
+     * <p>
      * https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
      */
     Timeline secondLoop;
@@ -71,6 +74,8 @@ public class Controller implements Initializable {
         cameras = new CameraController();
         cameras.openWindow();
 
+        settings = new SettingsController();
+
         secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
 
             @Override
@@ -87,8 +92,7 @@ public class Controller implements Initializable {
         secondLoop.play();
     }
 
-    public void roverHTTPGet()
-    {
+    public void roverHTTPGet() {
         try {
             String response = CommunicationsController.getSensorData(driveIP);
             logger.setText(response);
@@ -111,6 +115,9 @@ public class Controller implements Initializable {
         ipController.open();
     }
 
+    public void openSettings() {
+        settings.open();
+    }
     // setters for IP's for device
     // Note: updateAddresses() pulls IP's from this main controller
     public static void setDriveIP(String ip) {
