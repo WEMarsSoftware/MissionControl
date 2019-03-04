@@ -15,22 +15,23 @@ import java.util.ResourceBundle;
 
 public class SettingsController implements Initializable {
 
-    // GLOBALS
+    // GLOBAL SETTINGS
     public static String driveIPText, armIPText, cameraIPText;
     public static int pollingRateCamera, pollingRateDrive;
 
-    public static Stage stage;
 
+
+    private Stage stage;
     @FXML
-    public static TextField driveIP;
+    private TextField driveIP;
     @FXML
-    public static TextField armIP;
+    private TextField armIP;
     @FXML
-    public static TextField cameraIP;
+    private TextField cameraIP;
     @FXML
-    public static Slider cameraFPS;
+    private Slider cameraFPS;
     @FXML
-    public static Slider driveFPS;
+    private Slider driveFPS;
 
     public void open() {
         Parent root;
@@ -55,6 +56,7 @@ public class SettingsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) { /* do nothing */ }
 
+    // confirmed this works
     public void save() {
         // save selections
         driveIPText = driveIP.getText();
