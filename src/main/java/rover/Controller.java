@@ -6,17 +6,13 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-// My Task CODE
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javafx.application.Application;
+// Background Task code dependencies
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.concurrent.ScheduledService;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -68,6 +64,8 @@ public class Controller implements Initializable {
     public SettingsData settingsData = SettingsData.getInstance();
 
     public static DataBackgroundService service;
+
+    public static int initialStart = 0;
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads
@@ -97,6 +95,13 @@ public class Controller implements Initializable {
             public void handle(WorkerStateEvent t) {
 
                 System.out.println("[" + service.getTicks() + "] Rover Data Fetched!");
+
+                /**
+                 * roverHTTPGet() is called outside the background thread, so that it
+                 * maintains access to the javaFX thread and is able to update labels
+                 * @TODO - convert this to use JavaFX's messages, as it's a thread-safe
+                 * way to do it
+                 */
                 roverHTTPGet();
 
             }
@@ -106,11 +111,25 @@ public class Controller implements Initializable {
         // Start the Service
         //service.start();
     }
+
+    /**
+     * Start the Service (aka Connect)
+     */
     public void startService(){
-        service.start();
+        if(initialStart == 0) {
+            service.start();
+        } else {
+            service.restart();
+        }
     }
 
+    /**
+     * Stop the Service (aka disconnect)
+     */
     public void stopService(){
+        if(initialStart == 0){
+            initialStart = 1;
+        }
         service.cancel();
     }
 
@@ -187,7 +206,6 @@ public class Controller implements Initializable {
             return new Task<Integer>() {
                 protected Integer call() {
                     ts.set(getTicks() + 1); // Increase the tick in the timer
-
                     return getTicks();
                 }
             };
