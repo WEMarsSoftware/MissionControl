@@ -11,7 +11,7 @@
    <children>
       <Separator layoutX="289.0" layoutY="15.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <Separator layoutX="677.0" layoutY="20.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
-      <Button layoutX="871.0" layoutY="1.0" mnemonicParsing="false" onAction="#roverHTTPGet" prefHeight="27.0" prefWidth="122.0" text="Test Connection" />
+      <Button layoutX="914.0" layoutY="1.0" mnemonicParsing="false" onAction="#startService" prefHeight="27.0" prefWidth="79.0" text="Connect" />
       <TextArea fx:id="logger" layoutX="682.0" layoutY="408.0" prefHeight="200.0" prefWidth="322.0" wrapText="true" />
       <Label fx:id="motor1" layoutX="886.0" layoutY="67.0" prefHeight="17.0" prefWidth="126.0" text="Motor 1: 19.2" />
       <Label fx:id="motor2" layoutX="884.0" layoutY="85.0" prefHeight="17.0" prefWidth="126.0" text="Motor 2: 19.2" />
@@ -19,7 +19,8 @@
       <Label fx:id="motor4" layoutX="883.0" layoutY="127.0" prefHeight="17.0" prefWidth="126.0" text="Motor 4: 19.2" />
       <Label fx:id="motor5" layoutX="881.0" layoutY="144.0" prefHeight="17.0" prefWidth="126.0" text="Motor 5: 19.2" />
       <Label fx:id="motor6" layoutX="876.0" layoutY="161.0" prefHeight="17.0" prefWidth="126.0" text="Motor 6: 19.2" />
-      <Button layoutX="782.0" layoutY="1.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="27.0" prefWidth="79.0" text="Settings" />
+      <Button layoutX="720.0" layoutY="1.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="27.0" prefWidth="79.0" text="Settings" />
       <ImageView fitHeight="243.0" fitWidth="391.0" layoutX="289.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="814.0" layoutY="6.0" mnemonicParsing="false" onAction="#stopService" text="Disconnect" />
    </children>
 </AnchorPane>

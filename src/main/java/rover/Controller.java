@@ -6,6 +6,20 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// My Task CODE
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+
 
 import javafx.scene.control.*;
 
@@ -53,6 +67,7 @@ public class Controller implements Initializable {
 
     public SettingsData settingsData = SettingsData.getInstance();
 
+    public static DataBackgroundService service;
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads
@@ -67,29 +82,36 @@ public class Controller implements Initializable {
 
         /* Initialize data points */
         comms = new CommunicationsController();
-
-
-
-        /* Initialize camera feeds */
-        cameras = new CameraController();
-        cameras.openWindow();
-
         settings = new SettingsController();
 
-        secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        /*
+         * Initialize the ESP-Service background task
+         */
+        service = new DataBackgroundService();      // Timer Service
+        service.setPeriod(Duration.seconds(1));           // Set the period
+
+        // call roverHTTPGet() when a task cycle has complete
+        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
             @Override
-            public void handle(ActionEvent event) {
-                try {
-                    cameras.update();
+            public void handle(WorkerStateEvent t) {
 
-                } catch (Exception e) {
-                    /* Do nothing */
-                }
+                System.out.println("[" + service.getTicks() + "] Rover Data Fetched!");
+                roverHTTPGet();
+
             }
-        }));
-        secondLoop.setCycleCount(Animation.INDEFINITE);
-        secondLoop.play();
+        });
+
+
+        // Start the Service
+        //service.start();
+    }
+    public void startService(){
+        service.start();
+    }
+
+    public void stopService(){
+        service.cancel();
     }
 
     public void roverHTTPGet() {
@@ -138,4 +160,40 @@ public class Controller implements Initializable {
     }
 
     public static String getJestonIP() { return jetsonIP; }
+
+
+    /**
+     * Service to constantly make HTTP requests from the background
+     *
+     */
+    private class DataBackgroundService extends ScheduledService<Integer> {
+        private IntegerProperty ts = new SimpleIntegerProperty();
+
+        public final void setTicks(Integer value) {
+            ts.set(value);
+            //roverHTTPGet();
+        }
+
+        public final Integer getTicks() {
+            //roverHTTPGet();
+            return ts.get();
+        }
+
+        public final IntegerProperty ticks() {
+            return ts;
+        }
+
+        protected Task<Integer> createTask() {
+            return new Task<Integer>() {
+                protected Integer call() {
+                    ts.set(getTicks() + 1); // Increase the tick in the timer
+
+                    return getTicks();
+                }
+            };
+        }
+    }
+
 }
+
+
