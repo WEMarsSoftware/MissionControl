@@ -12,6 +12,8 @@ import java.lang.*;
 
 import org.json.*;
 
+import rover.SettingsData.*;
+
 public class CommunicationsController {
 
     /* This may need to be changed for different systems */
@@ -28,6 +30,8 @@ public class CommunicationsController {
     public CommunicationsController() {
         motorCurrents = new double[NUM_MOTORS];
     }
+
+    public SettingsData settingsData = SettingsData.getInstance();
 
     /**
      * @param url - IP of controller with current sensors

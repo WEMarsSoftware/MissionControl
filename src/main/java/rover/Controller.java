@@ -18,6 +18,8 @@ import javafx.event.ActionEvent;
 
 import weutils.TabManager;
 
+import rover.SettingsData.*;
+
 public class Controller implements Initializable {
     /**
      * IP's of various controllers
@@ -43,15 +45,13 @@ public class Controller implements Initializable {
     @FXML
     private Label motor6;
 
-    @FXML
-    private TabPane testTab;
-
-
     private CommunicationsController comms;
 
     private static CameraController cameras;
 
     private SettingsController settings;
+
+    public SettingsData settingsData = SettingsData.getInstance();
 
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
@@ -63,12 +63,12 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+
         /* Initialize data points */
         comms = new CommunicationsController();
 
 
-        //
-        TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
 
         /* Initialize camera feeds */
         cameras = new CameraController();
@@ -94,7 +94,7 @@ public class Controller implements Initializable {
 
     public void roverHTTPGet() {
         try {
-            String response = CommunicationsController.getSensorData(driveIP);
+            String response = CommunicationsController.getSensorData(settingsData.driveIP);
             logger.setText(response);
             CommunicationsController.updateData(response);
             CommunicationsController.updateLabel(motor1, 0);

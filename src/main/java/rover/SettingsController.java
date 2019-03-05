@@ -1,5 +1,6 @@
 package rover;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import rover.SettingsData.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -19,7 +22,7 @@ public class SettingsController implements Initializable {
     public static String driveIPText, armIPText, cameraIPText;
     public static int pollingRateCamera, pollingRateDrive;
 
-
+    public static SettingsData settingsData = SettingsData.getInstance();;
 
     private Stage stage;
     @FXML
@@ -33,16 +36,23 @@ public class SettingsController implements Initializable {
     @FXML
     private Slider driveFPS;
 
+    @FXML
     public void open() {
+        System.out.println("Opened");
+
         Parent root;
         try {
             String addIPSPath = "/fxml/settings.fxml";
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(addIPSPath));
             loader.setLocation(getClass().getResource(addIPSPath));
-            root = (Parent)loader.load();
+            root = loader.load();
             stage = new Stage();
+
+
             stage.setTitle("Settings");
             stage.setScene(new Scene(root, 500, 300));
+
+
             stage.setResizable(false);
             stage.getIcons().add(new Image("/images/WesternLogo.png"));
             stage.show();
@@ -58,13 +68,18 @@ public class SettingsController implements Initializable {
 
     // confirmed this works
     public void save() {
-        // save selections
+        // save selections -- May not need these
+        System.out.println("Opened-save");
         driveIPText = driveIP.getText();
         armIPText = armIP.getText();
         cameraIPText = cameraIP.getText();
         pollingRateCamera = (int)(cameraFPS.getValue());
         pollingRateDrive = (int)(driveFPS.getValue());
 
+        // Save Singleton Datagra
+        settingsData.driveIP = driveIPText;
+        settingsData.armIP = armIPText;
+        settingsData.jetsonIP = cameraIPText;
         close();
     }
 
