@@ -15,7 +15,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
 
-
+import weutils.BackgroundService;
 
 import javafx.scene.control.*;
 
@@ -63,7 +63,7 @@ public class Controller implements Initializable {
 
     public SettingsData settingsData = SettingsData.getInstance();
 
-    public static DataBackgroundService service;
+    public static BackgroundService service;
 
     public static int initialStart = 0;
     /**
@@ -85,7 +85,7 @@ public class Controller implements Initializable {
         /*
          * Initialize the ESP-Service background task
          */
-        service = new DataBackgroundService();      // Timer Service
+        service = new BackgroundService();      // Timer Service
         service.setPeriod(Duration.seconds(1));           // Set the period
 
         // call roverHTTPGet() when a task cycle has complete
@@ -150,38 +150,6 @@ public class Controller implements Initializable {
 
     public void openSettings() {
         settings.open();
-    }
-
-    public static String getJestonIP() { return jetsonIP; }
-
-
-    /**
-     * Service to constantly make HTTP requests from the background
-     *
-     */
-    private class DataBackgroundService extends ScheduledService<Integer> {
-        private IntegerProperty ts = new SimpleIntegerProperty();
-
-        public final void setTicks(Integer value) {
-            ts.set(value);
-        }
-
-        public final Integer getTicks() {
-            return ts.get();
-        }
-
-        public final IntegerProperty ticks() {
-            return ts;
-        }
-
-        protected Task<Integer> createTask() {
-            return new Task<Integer>() {
-                protected Integer call() {
-                    ts.set(getTicks() + 1); // Increase the tick in the timer
-                    return getTicks();
-                }
-            };
-        }
     }
 
 }
