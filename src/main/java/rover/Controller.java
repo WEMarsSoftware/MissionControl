@@ -107,9 +107,6 @@ public class Controller implements Initializable {
             }
         });
 
-
-        // Start the Service
-        //service.start();
     }
 
     /**
@@ -150,32 +147,9 @@ public class Controller implements Initializable {
         }
     }
 
-    public void setRoverIPs() {
-        // opens new window
-        AddIPsController ipController = new AddIPsController();
-        ipController.open();
-    }
 
     public void openSettings() {
         settings.open();
-    }
-    // setters for IP's for device
-    // Note: updateAddresses() pulls IP's from this main controller
-    public static void setDriveIP(String ip) {
-        driveIP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setScience1IP(String ip) {
-        science1IP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setArmIP(String ip) {
-        armIP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setJetsonIP(String ip) {
-        jetsonIP = ip;
-        cameras.updateAddresses();
     }
 
     public static String getJestonIP() { return jetsonIP; }
@@ -190,11 +164,9 @@ public class Controller implements Initializable {
 
         public final void setTicks(Integer value) {
             ts.set(value);
-            //roverHTTPGet();
         }
 
         public final Integer getTicks() {
-            //roverHTTPGet();
             return ts.get();
         }
 
