@@ -1,5 +1,7 @@
 package rover;
 
+import weutils.HTTPManager;
+
 import java.net.URL;
 
 import javafx.scene.control.*;
@@ -28,6 +30,23 @@ public class CommunicationsController {
     public CommunicationsController() {
         motorCurrents = new double[NUM_MOTORS];
     }
+
+
+    /**
+    * Send a chassis drive command and return the response as a string.
+    * Returns motor speed and current values in JSON.
+    *
+    * @param left - percentage speed for left side motors
+    * @param right - percentage speed for right side motors
+    * @return response as String
+    * @throws if bad things happen
+    */
+    public static String sendDriveCommand(int left, int right) throws Exception
+    {
+        String url = ("http://"+SettingsController.driveIPText+"/?left-side="+Integer.toString(left)+"&right-side="+Integer.toString(right));
+        return HTTPManager.httpGet(url);
+    }
+
 
     /**
      * @param url - IP of controller with current sensors
@@ -66,7 +85,7 @@ public class CommunicationsController {
         in.close();
 
         return response.toString();
-    }
+    } 
 
     private static double getCurrentAsPercentage(double current) {
         return (current/MAX_CURRENT_IN_AMPS);
