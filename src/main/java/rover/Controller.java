@@ -6,6 +6,16 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// Background Task code dependencies
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
+
+import weutils.BackgroundService;
 
 import javafx.scene.control.*;
 
@@ -17,6 +27,8 @@ import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
 import weutils.TabManager;
+
+import rover.SettingsData.*;
 
 public class Controller implements Initializable {
     /**
@@ -43,16 +55,17 @@ public class Controller implements Initializable {
     @FXML
     private Label motor6;
 
-    @FXML
-    private TabPane testTab;
-
-
     private CommunicationsController comms;
 
     private static CameraController cameras;
 
     private SettingsController settings;
 
+    public SettingsData settingsData = SettingsData.getInstance();
+
+    public static BackgroundService service;
+
+    public static int initialStart = 0;
     /**
      * Any tasks that affect GUI elements need to run in a timeline handle()
      * Background tasks not affecting GUI stuff can run in Worker threads
@@ -63,38 +76,63 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+
         /* Initialize data points */
         comms = new CommunicationsController();
-
-
-        //
-        TabManager.create().setAllDockable(testTab);  // Convert to WEMars TabManager Utility
-
-        /* Initialize camera feeds */
-        cameras = new CameraController();
-        cameras.openWindow();
-
         settings = new SettingsController();
 
-        secondLoop = new Timeline(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+        /*
+         * Initialize the ESP-Service background task
+         */
+        service = new BackgroundService();      // Timer Service
+        service.setPeriod(Duration.seconds(1));           // Set the period
+
+        // call roverHTTPGet() when a task cycle has complete
+        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
             @Override
-            public void handle(ActionEvent event) {
-                try {
-                    cameras.update();
+            public void handle(WorkerStateEvent t) {
 
-                } catch (Exception e) {
-                    /* Do nothing */
-                }
+                System.out.println("[" + service.getTicks() + "] Rover Data Fetched!");
+
+                /**
+                 * roverHTTPGet() is called outside the background thread, so that it
+                 * maintains access to the javaFX thread and is able to update labels
+                 * @TODO - convert this to use JavaFX's messages, as it's a thread-safe
+                 * way to do it
+                 */
+                roverHTTPGet();
+
             }
-        }));
-        secondLoop.setCycleCount(Animation.INDEFINITE);
-        secondLoop.play();
+        });
+
+    }
+
+    /**
+     * Start the Service (aka Connect)
+     */
+    public void startService(){
+        if(initialStart == 0) {
+            service.start();
+        } else {
+            service.restart();
+        }
+    }
+
+    /**
+     * Stop the Service (aka disconnect)
+     */
+    public void stopService(){
+        if(initialStart == 0){
+            initialStart = 1;
+        }
+        service.cancel();
     }
 
     public void roverHTTPGet() {
         try {
-            String response = CommunicationsController.getSensorData(driveIP);
+            String response = CommunicationsController.getSensorData(settingsData.driveIP);
             logger.setText(response);
             CommunicationsController.updateData(response);
             CommunicationsController.updateLabel(motor1, 0);
@@ -109,33 +147,11 @@ public class Controller implements Initializable {
         }
     }
 
-    public void setRoverIPs() {
-        // opens new window
-        AddIPsController ipController = new AddIPsController();
-        ipController.open();
-    }
 
     public void openSettings() {
         settings.open();
     }
-    // setters for IP's for device
-    // Note: updateAddresses() pulls IP's from this main controller
-    public static void setDriveIP(String ip) {
-        driveIP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setScience1IP(String ip) {
-        science1IP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setArmIP(String ip) {
-        armIP = ip;
-        cameras.updateAddresses();
-    }
-    public static void setJetsonIP(String ip) {
-        jetsonIP = ip;
-        cameras.updateAddresses();
-    }
 
-    public static String getJestonIP() { return jetsonIP; }
 }
+
+

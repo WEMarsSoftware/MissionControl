@@ -3,6 +3,9 @@
 out/
 
 
+### Jar's ###
+*.jar
+
 
 ### Gradle ###
 .gradle

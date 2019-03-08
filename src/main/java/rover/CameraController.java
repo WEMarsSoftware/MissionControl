@@ -59,10 +59,11 @@ public class CameraController implements Initializable {
       */
     public void update() {
         try {
-            ((ImageView)root.getChildren().get(0)).setImage(new Image(camera1Source));
-            ((ImageView)root.getChildren().get(1)).setImage(new Image(camera2Source));
-            ((ImageView)root.getChildren().get(2)).setImage(new Image(camera3Source));
-            ((ImageView)root.getChildren().get(3)).setImage(new Image(camera4Source));
+            String address = SettingsData.getJestonIP()+Integer.toString(SettingsData.getPollingRateCamera());
+            ((ImageView)root.getChildren().get(0)).setImage(new Image(address));
+            // ((ImageView)root.getChildren().get(1)).setImage(new Image(camera2Source));
+            // ((ImageView)root.getChildren().get(2)).setImage(new Image(camera3Source));
+            // ((ImageView)root.getChildren().get(3)).setImage(new Image(camera4Source));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,14 +79,13 @@ public class CameraController implements Initializable {
         camera4Source = Controller.getJestonIP()+"/camera4";
         */
         // TODO: use commented out stuff in future (this is for testing)
-        camera1Source = camera2Source = camera3Source = camera4Source = "https://static.thenounproject.com/png/302033-200.png";
+       // camera1Source = camera2Source = camera3Source = camera4Source = "https://static.thenounproject.com/png/302033-200.png";
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         /* Do nothing */
         updateAddresses();
-        update();
     }
 
 }
