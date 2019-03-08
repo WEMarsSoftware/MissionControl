@@ -14,6 +14,8 @@ import java.lang.*;
 
 import org.json.*;
 
+import rover.SettingsData.*;
+
 public class CommunicationsController {
 
     /* This may need to be changed for different systems */
@@ -31,7 +33,6 @@ public class CommunicationsController {
         motorCurrents = new double[NUM_MOTORS];
     }
 
-
     /**
     * Send a chassis drive command and return the response as a string.
     * Returns motor speed and current values in JSON.
@@ -43,10 +44,11 @@ public class CommunicationsController {
     */
     public static String sendDriveCommand(int left, int right) throws Exception
     {
-        String url = ("http://"+SettingsController.driveIPText+"/?left-side="+Integer.toString(left)+"&right-side="+Integer.toString(right));
+        String url = ("http://"+SettingsData.getDriveIP()+"/?left-side="+Integer.toString(left)+"&right-side="+Integer.toString(right));
         return HTTPManager.httpGet(url);
     }
 
+    public SettingsData settingsData = SettingsData.getInstance();
 
     /**
      * @param url - IP of controller with current sensors
