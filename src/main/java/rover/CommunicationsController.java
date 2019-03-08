@@ -37,8 +37,8 @@ public class CommunicationsController {
     * Send a chassis drive command and return the response as a string.
     * Returns motor speed and current values in JSON.
     *
-    * @param left - percentage speed for left side motors
-    * @param right - percentage speed for right side motors
+    * @param left - percentage speed for left side motors (-100 to +100)
+    * @param right - percentage speed for right side motors (-100 to +100)
     * @return response as String
     * @throws if bad things happen
     */
@@ -46,6 +46,34 @@ public class CommunicationsController {
     {
         String url = ("http://"+SettingsData.getDriveIP()+"/?left-side="+Integer.toString(left)+"&right-side="+Integer.toString(right));
         return HTTPManager.httpGet(url);
+    }
+    /**
+    * Send command to ESP-32 controlling arm.
+    * will return JSON with sensor data:
+    *
+    *   { 
+    *     "Current-Motor1":0,
+    *       ...
+    *     "Current-Motor6":0,
+    *     "Pot-Motor1":15,
+    *       ...
+    *     "Pot-Motor6":20 
+    *    }
+    *
+    * @param motorPowers -> 6 "percentage power values" (from -100 to +100) for 6 arm motors
+    * @return entire JSON response as string w/ newlines removes
+    */
+    public static String sendArmCommand(int[6] motorPowers) throws Exception
+    {
+        String url = ("http://"+SettingsData.getArmIP()
+            +"/?motor1="+Integer.toString(motorPowers[0])
+            +"&motor2="+Integer.toString(motorPowers[1])
+            +"&motor3="+Integer.toString(motorPowers[2])
+            +"&motor4="+Integer.toString(motorPowers[3])
+            +"&motor5="+Integer.toString(motorPowers[4])
+            +"&motor6="+Integer.toString(motorPowers[5]);
+            return HTTPManager.httpGet(url);
+
     }
 
     public SettingsData settingsData = SettingsData.getInstance();
