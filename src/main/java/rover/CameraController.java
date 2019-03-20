@@ -29,7 +29,6 @@ public class CameraController implements Initializable {
     // a little more explicit than an array
     private String camera1Source, camera2Source, camera3Source, camera4Source;
 
-
     public CameraController() {
         updateAddresses();
     }

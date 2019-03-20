@@ -63,7 +63,11 @@ public class Controller implements Initializable {
 
     public SettingsData settingsData = SettingsData.getInstance();
 
-    public static BackgroundService service;
+    /**
+     * Background Services
+     */
+    public static BackgroundService espService;
+    public static BackgroundService camService;
 
     public static int initialStart = 0;
     /**
@@ -84,17 +88,15 @@ public class Controller implements Initializable {
 
         /*
          * Initialize the ESP-Service background task
-         */
-        service = new BackgroundService();      // Timer Service
-        service.setPeriod(Duration.seconds(1));           // Set the period
-
-        // call roverHTTPGet() when a task cycle has complete
-        service.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+         */ 
+        espService = new BackgroundService();      // Timer Service
+        espService.setPeriod(Duration.seconds(1));           // Set the period
+        espService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
 
             @Override
             public void handle(WorkerStateEvent t) {
 
-                System.out.println("[" + service.getTicks() + "] Rover Data Fetched!");
+                System.out.println("[" + espService.getTicks() + "] Rover Data Fetched!");
 
                 /**
                  * roverHTTPGet() is called outside the background thread, so that it
@@ -102,21 +104,41 @@ public class Controller implements Initializable {
                  * @TODO - convert this to use JavaFX's messages, as it's a thread-safe
                  * way to do it
                  */
+                roverHTTPGet(); 
+
+            }
+        }
+    
+        /*
+         * Initialize the ESP-Service background task
+         */
+        camService = new BackgroundService();      // Timer Service
+        camService.setPeriod(Duration.seconds(0.5));           // Set the period
+        camService.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+
+            @Override
+            public void handle(WorkerStateEvent t) {
+
+                System.out.println("[" + camService.getTicks() + "] Cam Data Fetched!");
                 roverHTTPGet();
+
+        
 
             }
         });
 
     }
+    
+
 
     /**
      * Start the Service (aka Connect)
      */
     public void startService(){
         if(initialStart == 0) {
-            service.start();
+            espService.start();
         } else {
-            service.restart();
+            espService.restart();
         }
     }
 
@@ -127,7 +149,7 @@ public class Controller implements Initializable {
         if(initialStart == 0){
             initialStart = 1;
         }
-        service.cancel();
+        espService.cancel();
     }
 
     public void roverHTTPGet() {
@@ -143,6 +165,16 @@ public class Controller implements Initializable {
             CommunicationsController.updateLabel(motor6, 5);
         } catch (Exception e) {
             System.out.println("ROVER HTTP GET ERROR");
+            System.out.println(e.getCause() + " " + e.getMessage());
+        }
+    }
+
+    public void camHTTPGet(){
+        try {
+            // Code for getting image
+            // Setting image url
+        } catch (Exception e){
+            System.out.println("CAM HTTP GET ERROR");
             System.out.println(e.getCause() + " " + e.getMessage());
         }
     }
