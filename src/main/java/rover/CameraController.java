@@ -59,8 +59,8 @@ public class CameraController implements Initializable {
       */
     public void update() {
         try {
-            String address = SettingsData.getJestonIP()+Integer.toString(SettingsData.getPollingRateCamera());
-            ((ImageView)root.getChildren().get(0)).setImage(new Image(address));
+            // String address = SettingsData.getJestonIP()+Integer.toString(SettingsData.getPollingRateCamera());
+            // ((ImageView)root.getChildren().get(0)).setImage(new Image(address));
             // ((ImageView)root.getChildren().get(1)).setImage(new Image(camera2Source));
             // ((ImageView)root.getChildren().get(2)).setImage(new Image(camera3Source));
             // ((ImageView)root.getChildren().get(3)).setImage(new Image(camera4Source));

@@ -63,7 +63,7 @@ public class CommunicationsController {
     * @param motorPowers -> 6 "percentage power values" (from -100 to +100) for 6 arm motors
     * @return entire JSON response as string w/ newlines removes
     */
-    public static String sendArmCommand(int[6] motorPowers) throws Exception
+    public static String sendArmCommand(int[] motorPowers) throws Exception
     {
         String url = ("http://"+SettingsData.getArmIP()
             +"/?motor1="+Integer.toString(motorPowers[0])
@@ -71,7 +71,7 @@ public class CommunicationsController {
             +"&motor3="+Integer.toString(motorPowers[2])
             +"&motor4="+Integer.toString(motorPowers[3])
             +"&motor5="+Integer.toString(motorPowers[4])
-            +"&motor6="+Integer.toString(motorPowers[5]);
+            +"&motor6="+Integer.toString(motorPowers[5]));
             return HTTPManager.httpGet(url);
 
     }
