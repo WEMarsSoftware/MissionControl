@@ -14,6 +14,7 @@ apply plugin: 'java'
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url "https://jitpack.io" }
 }
 
 
@@ -21,6 +22,7 @@ dependencies{
     compile 'org.json:json:20180813'
     compile 'net.java.jinput:jinput-platform:2.0.7'
     compile 'net.java.jinput:jinput:2.0.7'
+    compile 'com.github.WilliamAHartman:Jamepad:1.3.2'
 }
 
 apply plugin: 'javafx-gradle-plugin'

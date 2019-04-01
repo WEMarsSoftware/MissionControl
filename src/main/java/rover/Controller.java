@@ -107,7 +107,7 @@ public class Controller implements Initializable {
                 roverHTTPGet(); 
 
             }
-        }
+        });
     
         /*
          * Initialize the ESP-Service background task
