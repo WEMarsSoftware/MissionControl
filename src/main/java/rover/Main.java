@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
+import weutils.ControllerService;
 /*
 Links:
  - communicating with Arduino by reading data from a Serial port in Java:
@@ -24,6 +25,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/sample.fxml"));
         primaryStage.setTitle("WE MARS Mission Control");
         Scene primaryScene = new Scene(root, 1000, 600);
@@ -42,6 +44,11 @@ public class Main extends Application {
         primaryStage.getIcons().add(new Image("/images/WesternLogo.png"));
         primaryStage.setResizable(true);
         primaryStage.show();
+
+        // Start the Controller Service
+        ControllerService conService = new ControllerService();
+        conService.setPeriod(1);
+        conService.start();
     }
 
 
