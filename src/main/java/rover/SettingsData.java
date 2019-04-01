@@ -9,6 +9,7 @@ public class SettingsData {
     public static String armIP;
     public static String jetsonIP;
     public static String driveIP;
+    public static int pollingRateCamera, pollingRateDrive;
 
     private SettingsData(){
         SettingsData.driveIP = "0.0.0.0";
@@ -71,5 +72,13 @@ public class SettingsData {
      */
     public static void setArmIP(String armIP) {
         SettingsData.armIP = armIP;
+    }
+
+    public static void setPollingRateCamera(int x) {
+        pollingRateCamera = x;
+    }
+
+    public static void setPollingRateDrive(int x) {
+        pollingRateDrive = x;
     }
 }

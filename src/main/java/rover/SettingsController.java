@@ -80,6 +80,9 @@ public class SettingsController implements Initializable {
         settingsData.driveIP = driveIPText;
         settingsData.armIP = armIPText;
         settingsData.jetsonIP = cameraIPText;
+        settingsData.pollingRateCamera = pollingRateCamera;
+        settingsData.pollingRateDrive = pollingRateDrive;
+        
         close();
     }
 

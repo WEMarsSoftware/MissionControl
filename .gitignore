@@ -2,10 +2,20 @@
 *.DS_Store
 out/
 
+*.class
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+### Jar's ###
+*.jar
 
 
 ### Gradle ###
 .gradle
+.gradle/*
 build/
 
 # Ignore Gradle GUI config
