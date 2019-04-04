@@ -26,6 +26,9 @@ import javafx.util.Duration;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+
+// Move later
+import javafx.scene.shape.Circle;
 import weutils.TabManager;
 
 import rover.SettingsData.*;
@@ -54,6 +57,21 @@ public class Controller implements Initializable {
     private Label motor5;
     @FXML
     private Label motor6;
+
+    
+     // Controller Pane Settings
+    @FXML
+    private Circle buttonA;
+
+    @FXML
+    private Circle buttonB;
+
+    @FXML
+    private Circle buttonX;
+
+    @FXML
+    private Circle buttonY;
+
 
     private CommunicationsController comms;
 
@@ -86,7 +104,9 @@ public class Controller implements Initializable {
         comms = new CommunicationsController();
         settings = new SettingsController();
 
-        /*
+        buttonA.setFill(javafx.scene.paint.Color.RED);
+
+        /* 
          * Initialize the ESP-Service background task
          */ 
         espService = new BackgroundService();      // Timer Service

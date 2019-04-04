@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/sample.fxml"));
-        primaryStage.setTitle("WE MARS Mission Control");
+        primaryStage.setTitle("WEMars Mission Control");
         Scene primaryScene = new Scene(root, 1000, 600);
 
         /* Callback for key press events
@@ -39,8 +39,10 @@ public class Main extends Application {
             // System.out.println(codeString);
         });
 
+        // Set the primary scene
         primaryStage.setScene(primaryScene);
 
+        // Primary Stag configuration
         primaryStage.getIcons().add(new Image("/images/WesternLogo.png"));
         primaryStage.setResizable(true);
         primaryStage.show();

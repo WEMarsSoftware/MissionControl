@@ -6,13 +6,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1004.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="rover.Controller">
    <children>
       <Separator layoutX="289.0" layoutY="15.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <Separator layoutX="677.0" layoutY="20.0" orientation="VERTICAL" prefHeight="594.0" prefWidth="11.0" />
       <Button layoutX="910.0" layoutY="6.0" mnemonicParsing="false" onAction="#startService" prefHeight="27.0" prefWidth="79.0" text="Connect" />
-      <TextArea fx:id="logger" layoutX="682.0" layoutY="408.0" prefHeight="200.0" prefWidth="322.0" wrapText="true" />
+      <TextArea fx:id="logger" layoutX="683.0" layoutY="378.0" prefHeight="256.0" prefWidth="322.0" wrapText="true" />
       <Label fx:id="motor1" layoutX="886.0" layoutY="67.0" prefHeight="17.0" prefWidth="126.0" text="Motor 1: 19.2" />
       <Label fx:id="motor2" layoutX="884.0" layoutY="85.0" prefHeight="17.0" prefWidth="126.0" text="Motor 2: 19.2" />
       <Label fx:id="motor3" layoutX="881.0" layoutY="104.0" prefHeight="17.0" prefWidth="126.0" text="Motor 3: 19.2" />
@@ -22,5 +23,18 @@
       <Button layoutX="720.0" layoutY="6.0" mnemonicParsing="false" onAction="#openSettings" prefHeight="27.0" prefWidth="79.0" text="Settings" />
       <ImageView fitHeight="243.0" fitWidth="391.0" layoutX="289.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="814.0" layoutY="6.0" mnemonicParsing="false" onAction="#stopService" text="Disconnect" />
+      <Circle fx:id="buttonB" fill="DODGERBLUE" layoutX="618.0" layoutY="483.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonY" fill="DODGERBLUE" layoutX="592.0" layoutY="457.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonX" fill="DODGERBLUE" layoutX="566.0" layoutY="483.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle id="buttonA" fx:id="buttonA" fill="DODGERBLUE" layoutX="592.0" layoutY="506.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Axis1" fill="DODGERBLUE" layoutX="422.0" layoutY="546.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="Axis2" fill="DODGERBLUE" layoutX="539.0" layoutY="546.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonDRight" fill="DODGERBLUE" layoutX="396.0" layoutY="472.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonDUP" fill="DODGERBLUE" layoutX="370.0" layoutY="446.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonDLeft" fill="DODGERBLUE" layoutX="344.0" layoutY="472.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonDDown" fill="DODGERBLUE" layoutX="370.0" layoutY="495.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonStart" fill="DODGERBLUE" layoutX="525.0" layoutY="444.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="buttonSelect" fill="DODGERBLUE" layoutX="449.0" layoutY="444.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fill="DODGERBLUE" layoutX="488.0" layoutY="482.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>
